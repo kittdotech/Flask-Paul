@@ -74,6 +74,9 @@ function showtab(name) {
     var value = document.getElementById(name).innerHTML;
     if (value)
         $("textarea#extra_area").val(value);
+    else
+    $("textarea#extra_area").val(" ");
+
 }
 show(1);
     showtab('Summary');
@@ -220,7 +223,7 @@ if(param)
 
 
 
-<div id="pagenum">{{ page }}</div>
+<div id="pagenum" class="hidden">{{ page }}</div>
     {% if page==2 %}
     <div id="page2">
 {% else %}

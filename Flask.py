@@ -6,8 +6,97 @@ from flask import jsonify
 from flask import request
 from functools import partial
 import string
+import types
+
 app = Flask(__name__)
 
+from collections import Mapping, Set, Sequence
+
+# dual python 2/3 compatability, inspired by the "six" library
+string_types = (str, unicode) if str is bytes else (str, bytes)
+iteritems = lambda mapping: getattr(mapping, 'iteritems', mapping.items)()
+
+
+
+import types
+
+def walk(node):
+	str=""
+	if type(node) is types.UnicodeType:
+		return node
+	if type(node) is types.DictType:
+
+		for key, item in node.items():
+			if type(item) is types.DictType:
+				str+=key+" : \n{}".format(walk(item))
+			elif type(item) is types.ListType:
+				str+=key+" : \n{}".format(walklist(item))
+
+			else:
+				str+=key+" : {}".format(item)
+
+			str+='\n'
+
+
+	if type(node) is types.ListType:
+
+		for item in node:
+
+			if type(item) is types.DictType:
+
+				if str=="":
+
+					str+="{}".format(walk(item))
+				else:
+					str="{}, {}".format(str,walk(item))
+			else:
+				if str=="":
+					str+="{}".format(item)
+				else:
+					str="{}, {}".format(str,item)
+
+
+
+	return str
+def walklist(node):
+
+	if type(node) is types.ListType:
+		str=""
+		flag=1
+		for idx,item in enumerate(node):
+
+
+			if type(item) is types.DictType or type(item) is types.ListType:
+
+					str=str+"\n{}".format(walk(item))
+
+			else:
+				if str=="":
+					str=str+"{}".format(item)
+				else:
+					str=str+",{}".format(item)
+
+
+
+	return str
+
+def objwalk(obj, path=(), memo=None):
+    if memo is None:
+        memo = set()
+    iterator = None
+    if isinstance(obj, Mapping):
+        iterator = iteritems
+    elif isinstance(obj, (Sequence, Set)) and not isinstance(obj, string_types):
+        iterator = enumerate
+    if iterator:
+        if id(obj) not in memo:
+            memo.add(id(obj))
+            for path_component, value in iterator(obj):
+                for result in objwalk(value, path + (path_component,), memo):
+                    yield result
+            memo.remove(id(obj))
+    else:
+        yield path, obj
 
 @app.route('/apis')
 def apis(name=None):
@@ -34,13 +123,17 @@ def page2(name=None):
     with open(path) as data_file:
 
         for data in json_parse(data_file):
-            selected_info=data.get('article_title',"")
-            Summary=data.get('Summary', "")
-            Links=data.get('Links', "")
-            Hierarchy=data.get('Hierarchy', "")
-            Inferences=data.get('Inferences', "")
-            Reps=data.get('Reps', "")
-            Stats=data.get('Stats', "")
+            print data
+            selected_info=walk(data.get('article_title',""))
+
+            Summary=data.get('Summary', " ")
+            print data.get('Links', "")
+            Links=walk(data.get('Links', ""))
+            Hierarchy=walk(data.get('Hierarchy   ', ""))
+            Inferences=walk(data.get('Inferences', ""))
+            Reps=walk(data.get('Reps', ""))
+
+            Stats=walk(data.get('Stats', ""))
 
 
             for a in data['article_sections']:
@@ -100,4 +193,4 @@ def json_parse(fileobj, decoder=JSONDecoder(), buffersize=2048):
 
 if __name__ == '__main__':
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-    app.run()
+    app.run('0.0.0.0')
