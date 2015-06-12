@@ -3,6 +3,14 @@
     <script type="text/javascript">
 jQuery(document).ready(function() {
 
+
+    $('#searchtext').keypress(function(e){
+      if(e.keyCode==13)
+      $('#searchbutton').click();
+    });
+
+
+
 $(document).on('click','#json_file',function(e){
   var json_file=$('#json_file').val();
     if (json_file!=null) {
@@ -35,11 +43,11 @@ if(jQuery.trim(sk).length <= 0)
         if(result.hasOwnProperty('error')){
             $('#info').show();
             $('#info').text(result['error']);
-            $('#choice').html("<div id=\"choice\"><select name=\"json_file\" size=\"10\" id=\"json_file\" style=\"width:90%\"></select></div>");
+            $('#choice').html("<div id=\"choice\"><select name=\"json_file\" size=\"10\" id=\"json_file\"></select></div>");
 
             }
             else {
-            var search_info="<div id=\"choice\"><select name=\"json_file\" id=\"json_file\" size=\"10\" style=\"width:90%\">"
+            var search_info="<div id=\"choice\"><select name=\"json_file\" id=\"json_file\" size=\"10\">"
             $.each(result, function (key, value) {
                 search_info+="<option value=\""+key+"\">"+value+"</option>"
             });
@@ -134,24 +142,25 @@ if(param)
 
 
     <br/>
-    <table width='100%'>
+    <table width='100%' cellspacing="6">
     <tr>
 
-        <td><input type="text" id="searchtext" name="searchtext" value='{{ sk }}' style="width:90%"/></td>
+        <td width="70%"><input type="text" class="searchbox" id="searchtext" name="searchtext" value='{{ sk }}' /></td>
 
-        <td><input class="btn" type="button" id="searchbutton" name="searchbutton" value="Search" style="width:90%"/></td>
-        <td align="right"><input class="btn" type="button" id="plus" value="+"style="width:90%"/></td>
+        <td width="15%"><input class="btn" type="button" id="searchbutton" name="searchbutton" value="Search" /></td>
+
+        <td width="15%"><input class="btn" type="button" id="plus" value="+" /></td>
     </tr>
     <tr>
-        <td>
-        <div id="info">
+        <td colspan="3">
+        <div id="info" style="color:white;">
 
 
         </div>
         </td>
     </tr>
         <tr>
-        <td>
+        <td >
             {% if page==1 %}
 <div id="page1">
 {% else %}
@@ -160,7 +169,7 @@ if(param)
            <div id="choice">
 
 
-  <select name="json_file" id="json_file" size="10" style="width:90%">
+  <select name="json_file" id="json_file" size="10">
 
    </select>
 
@@ -171,6 +180,31 @@ if(param)
 
     </tr>
 
+
+
+
+    <tr>
+<td >
+        <table width="100%" style="width:100%;border:0;border-collapse: collapse">
+<tr>
+        <td  width="60%" style="color: white;">{{ selected_info }}</td>
+
+        <td width="10%" ><input class="btn" type="button" id="first" value="<<" /></td>
+        <td width="10%" ><input class="btn" type="button" id="previous" value="<" /></td>
+        <td width="10%" ><input class="btn" type="button" id="next" value=">" /></td>
+
+        <td width="10%" ><input class="btn" type="button" id="last" value=">>" /></td>
+</tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td  width="70%">
+        <textarea rows="10" cols="48" id="section_area">
+
+</textarea>
+        </td>
+        </tr>
 
 
     </table>
@@ -216,22 +250,26 @@ if(param)
 {% endfor %}
 
 
-    <table width="60%">
-
+    <!--table width="75%">
 
     <tr>
+<td>
+        <table>
+            <tr colspan="2">
 
-        <td width="40%" style="color: white;">{{ selected_info }}</td>
+        <td width="45%" style="color: white;">{{ selected_info }}</td>
         <td width="5%" align="right"><input class="btn" type="button" id="first" value="<<" style="width:100%"/></td>
         <td width="5%" align="right"><input class="btn" type="button" id="previous" value="<" style="width:100%" /></td>
         <td width="5%" align="right"><input class="btn" type="button" id="next" value=">" style="width:100%"/></td>
 
         <td  width="5%" align="right"><input class="btn" type="button" id="last" value=">>" style="width:100%"/></td>
-
+</tr>
+        </table>
+            </td>
     </tr>
     <tr>
-        <td colspan="5" width="60%">
-        <textarea rows="4" cols="43" id="section_area">
+        <td colspan="5" width="65%">
+        <textarea rows="10" cols="49" id="section_area">
 
 </textarea>
         </td>
@@ -242,23 +280,23 @@ if(param)
 
 
 
-    </table>
+    </table-->
     <br/>
 
 <table width="70%">
 <tr>
-         <td ><input class="btn tabs active" type="button" id="summary" value="Summary" style="width:100%"/></td>
-        <td ><input class="btn tabs " type="button" id="links" value="Links" style="width:100%" /></td>
-        <td ><input class="btn tabs" type="button" id="inferences" value="Inferences" style="width:100%"/></td>
+         <td ><input class="btn tabs active" type="button" id="summary" value="Summary" /></td>
+        <td ><input class="btn tabs " type="button" id="links" value="Links"  /></td>
+        <td ><input class="btn tabs" type="button" id="inferences" value="Inferences" /></td>
 
-        <td ><input class="btn tabs" type="button" id="hierarchy" value="Hierarchy" style="width:100%"/></td>
-        <td ><input class="btn tabs" type="button" id="rep" value="Rep" style="width:100%"/></td>
-        <td ><input class="btn tabs" type="button" id="stats" value="Stats" style="width:100%"/></td>
+        <td ><input class="btn tabs" type="button" id="hierarchy" value="Hierarchy" /></td>
+        <td ><input class="btn tabs" type="button" id="rep" value="Rep" /></td>
+        <td ><input class="btn tabs" type="button" id="stats" value="Stats" /></td>
 
         </tr>
     <tr>
 <td colspan="5" width="60%">
-        <textarea rows=12 cols="43" id="extra_area">
+        <textarea rows=12 cols="49" id="extra_area" style="background:#c2c2c2;">
 
 </textarea>
         </td>

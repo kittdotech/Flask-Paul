@@ -78,3 +78,56 @@ html, body
 {
     display:none;
 }
+
+#searchtext {
+    vertical-align: top;
+    display:inline-block;
+
+
+    border:0;
+
+    height:26px;
+    margin:0;
+    border:0;
+    width:100%;
+
+    font-size:16px;
+}
+#searchbutton {
+    display:inline-block;
+
+
+    margin:0;
+    height:28px;
+    width:100%;
+}
+#plus {
+    display:inline-block;
+
+
+    margin:0;
+    height:28px;
+    width:100%;
+}
+
+#first,#last,#previous,#next {
+    display:inline-block;
+
+    border:0;
+    margin:0;
+    height:28px;
+    width:100%;
+}
+#summary, #links, #inferences, #hierarchy, #rep, #stats
+{
+    display:inline-block;
+
+    border:0;
+    margin:0;
+    height:28px;
+    width:100%;
+}
+#json_file
+{
+    width:100%;
+}
