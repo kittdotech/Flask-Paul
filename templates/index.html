@@ -59,6 +59,7 @@ if(jQuery.trim(sk).length <= 0)
 
         }
             $('#page2').addClass('hidden');
+            $('#page2_1').addClass('hidden');
             $('#page1').removeClass('hidden');
     },
         error: function(err) {
@@ -182,7 +183,11 @@ if(param)
 
 
 
-
+{% if page==2 %}
+<div id="page2_1">
+{% else %}
+   <div id="page2_1" class="hidden">
+   {% endif %}
     <tr>
 <td >
         <table width="100%" style="width:100%;border:0;border-collapse: collapse">
@@ -200,22 +205,52 @@ if(param)
     </tr>
     <tr>
         <td  width="70%">
-        <textarea rows="10" cols="48" id="section_area">
+        <textarea rows="10" cols="10" id="section_area" style="width:99%;border:0">
 
 </textarea>
         </td>
         </tr>
+
+    <tr>
+        <td>
+        <table width="100%">
+<tr>
+         <td ><input class="btn tabs active" type="button" id="summary" value="Summary" /></td>
+        <td ><input class="btn tabs " type="button" id="links" value="Links"  /></td>
+        <td ><input class="btn tabs" type="button" id="inferences" value="Inferences" /></td>
+
+        <td ><input class="btn tabs" type="button" id="hierarchy" value="Hierarchy" /></td>
+        <td ><input class="btn tabs" type="button" id="rep" value="Rep" /></td>
+        <td ><input class="btn tabs" type="button" id="stats" value="Stats" /></td>
+
+        </tr>
+    <tr>
+<td colspan="6" width="70%">
+        <textarea rows=12 cols="49" id="extra_area" style="background:#c2c2c2;">
+
+</textarea>
+        </td>
+</tr>
+            </td>
+</table>
+
+    </tr>
+
+
+
+
+    </div>
 
 
     </table>
 
 
 
-    </ol>
+
 
 
     {% if page==2 %}
-    <div id="page2">
+    <div id="page2" >
 {% else %}
 
     <div id="page2" class="hidden">
@@ -249,26 +284,26 @@ if(param)
 #}
 {% endfor %}
 
-
-    <!--table width="75%">
+{#
+<table width="70%" cellspacing="6" style="border-collapse: collapse;">
 
     <tr>
 <td>
         <table>
-            <tr colspan="2">
+            <tr>
 
         <td width="45%" style="color: white;">{{ selected_info }}</td>
-        <td width="5%" align="right"><input class="btn" type="button" id="first" value="<<" style="width:100%"/></td>
-        <td width="5%" align="right"><input class="btn" type="button" id="previous" value="<" style="width:100%" /></td>
-        <td width="5%" align="right"><input class="btn" type="button" id="next" value=">" style="width:100%"/></td>
+        <td width="5%" ><input class="btn" type="button" id="first" value="<<" /></td>
+        <td width="5%" ><input class="btn" type="button" id="previous" value="<" /></td>
+        <td width="5%" ><input class="btn" type="button" id="next" value=">" /></td>
 
-        <td  width="5%" align="right"><input class="btn" type="button" id="last" value=">>" style="width:100%"/></td>
+        <td  width="5%" ><input class="btn" type="button" id="last" value=">>" /></td>
 </tr>
         </table>
             </td>
     </tr>
     <tr>
-        <td colspan="5" width="65%">
+        <td colspan="5" width="70%">
         <textarea rows="10" cols="49" id="section_area">
 
 </textarea>
@@ -280,7 +315,7 @@ if(param)
 
 
 
-    </table-->
+    </table>
     <br/>
 
 <table width="70%">
@@ -295,13 +330,14 @@ if(param)
 
         </tr>
     <tr>
-<td colspan="5" width="60%">
+<td colspan="6" width="70%">
         <textarea rows=12 cols="49" id="extra_area" style="background:#c2c2c2;">
 
 </textarea>
         </td>
 </tr>
 </table>
+    #}
 
     </div>
 
