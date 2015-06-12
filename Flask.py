@@ -9,9 +9,20 @@ import string
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/apis')
+def apis(name=None):
+    return render_template('apis.html',name=name)
+
+
+
+@app.route('/settings')
+def settings(name=None):
+    return render_template('settings.html',name=name)
+
+@app.route('/index')
 def index(name=None):
-    return render_template('index.html',name=name,page=1)
+    sk=request.args.get('sk',"")
+    return render_template('index.html',name=name,page=1,sk=sk)
     #return 'hello'
 @app.route('/details')
 def page2(name=None):
@@ -40,7 +51,7 @@ def page2(name=None):
 
 
 
-    return render_template('index.html',sk=sk,selected_info=selected_info,page=2,section_text=data['article_sections'],Stats=Stats,Reps=Reps,Summary=Summary,Links=Links,Inferences=Inferences,Hierarchy=Hierarchy )
+    return render_template('details.html',sk=sk,selected_info=selected_info,page=2,section_text=data['article_sections'],Stats=Stats,Reps=Reps,Summary=Summary,Links=Links,Inferences=Inferences,Hierarchy=Hierarchy )
 
 @app.route('/search',methods = ['POST','GET'])
 def search(key=None):
@@ -82,6 +93,9 @@ def json_parse(fileobj, decoder=JSONDecoder(), buffersize=2048):
              except ValueError:
                  # Not enough data to decode, read more
                  break
+
+
+
 
 
 if __name__ == '__main__':
