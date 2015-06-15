@@ -1,22 +1,27 @@
 {% extends 'main.html' %}
 {% block headextra %}
     <script type="text/javascript">
-jQuery(document).ready(function() {
-
-var tab_selected="Summary";
+    var tab_selected="Summary";
 var section_selected="";
-function assigntab(name) {
+    var JSON=null;
+jQuery(document).ready(function() {
+$("#divcontent").addClass("height_fixed").removeClass("height_auto");
+    $("#extra_info_table").hide();
 
-    section_selected=name;
-    showtab();
-}
+
 function showtab() {
+
+
     var value = JSON[section_selected]["collection_details"][tab_selected];
-    alert(value);
-    if (value)
-        $("#extra_area").innerHTML=value;
+
+    var tabdiv = document.getElementById('extra_area');
+
+    if (value) {
+
+        tabdiv.innerHTML = value;
+    }
     else
-         $("#extra_area").innerHTML="";
+         tabdiv.innerHTML=" ";
 
 }
 
@@ -30,15 +35,13 @@ function showtab() {
 
         // Show/Hide Tabs
 
-    $( "input.tabs" ).removeClass( "active" )
+    $( "input.tabs" ).removeClass( "active" );
     $( this ).addClass( "active" );
         var attrib=$(this).attr("value");
-        section_selected=attrib;
+        tab_selected=attrib;
 
         showtab();
 
-if(param)
-      $("textarea#extra_area").val(param);
 
 
         e.preventDefault();
@@ -48,9 +51,10 @@ $(document).on('click', '.lks',function(e)  {
 
         // Show/Hide Tabs
 
-        var attrib=$(this).attr("value");
+        section_selected=$(this).attr("value");
+            $("#extra_info_table").show();
 
-        assigntab(attrib);
+        showtab();
 
 
         e.preventDefault();
@@ -82,6 +86,10 @@ if(jQuery.trim(sk).length <= 0)
         if(result.hasOwnProperty('error')){
             $('#info').show();
             $('#info').text(result['error']);
+            $("#divcontent").addClass("height_fixed").removeClass("height_auto");
+                $("#extra_info_table").hide();
+
+
             $('#choice').html("<div id=\"choice\"></div>");
 
             }
@@ -89,7 +97,7 @@ if(jQuery.trim(sk).length <= 0)
             var search_info="<div id=\"choice\">"
             $.each(result, function (key, value) {
 
-                $.each(value.articles_details, function (skey, svalue) {
+                    $.each(value.articles_details, function (skey, svalue) {
                     search_info+="<br/><b><a class=\"lks\" href=\"#\" value=\""+key+"\">"+skey+"</a></b><br/>"+svalue+"<br/>";
 
                 });
@@ -97,6 +105,8 @@ if(jQuery.trim(sk).length <= 0)
             $('#info').hide();
 
             search_info+="</div>"
+            $("#divcontent").addClass("height_auto").removeClass("height_fixed");
+
             $('#choice').html(search_info);
 
 
@@ -142,7 +152,6 @@ $('#searchbutton').click();
         <tr>
             <td colspan="3">
 
-                <br/><b>Ryan Suspect</b><br/>The border-color property sets the color of an element's four borders. This  property can have from ... top border is red; right border is green; bottom border is  blue; left border is pink ... HTML DOM reference: borderColor property · «  Previous.
 <div id="choice"></div>
             </td>
 
@@ -179,7 +188,7 @@ $('#searchbutton').click();
 
 {% block sidecontent %}
     <br/>
-<table width="100%" >
+<table id="extra_info_table" width="100%" >
 <tr>
         <td ><input class="dbtn tabs active" type="button" id="summary" value="Summary" /></td>
         <td ><input class="dbtn tabs" type="button" id="inferences" value="Inferences" /></td>
@@ -193,8 +202,7 @@ $('#searchbutton').click();
         </tr>
     <tr>
         <td width="100%" colspan="6">
-            <div id="extra_area">sdfkjhzdkjhzsdgoii</div>
-
+          <div width="100%" id="extra_area"></div>
         </td>
     </tr>
 </table>
