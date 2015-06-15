@@ -3,6 +3,35 @@
     <script type="text/javascript">
 jQuery(document).ready(function() {
 
+var Summary="";
+
+    var Links="";
+    var Hierarchy="";
+    var Reps="";
+    var Inferences="";
+    var Stats="";
+
+function assigntab(name) {
+    alert(JSON[name].collection_details.Stats);
+
+    $.each(JSON, function (key, value) {
+ $.each(value.collection_details, function (skey, svalue) {
+                    console.log(skey);
+
+
+                });
+
+            });
+
+}
+function showtab(name) {
+    var value = document.getElementById(name).innerHTML;
+    if (value)
+        $("textarea#extra_area").val(value);
+    else
+    $("textarea#extra_area").val(" ");
+
+}
 
 
     $('#searchtext').keypress(function(e){
@@ -10,7 +39,34 @@ jQuery(document).ready(function() {
       $('#searchbutton').click();
     });
 
+    jQuery('input.tabs').on('click', function(e)  {
 
+        // Show/Hide Tabs
+
+    $( "input.tabs" ).removeClass( "active" )
+    $( this ).addClass( "active" );
+        var attrib=$(this).attr("value");
+        document.getElementById('tabs').innerHTML=attrib;
+
+        showtab(attrib)
+
+if(param)
+      $("textarea#extra_area").val(param);
+
+
+        e.preventDefault();
+    });
+
+$(document).on('click', '.lks',function(e)  {
+
+        // Show/Hide Tabs
+
+        var attrib=$(this).attr("value");
+        assigntab(attrib);
+    alert(attrib);
+
+        e.preventDefault();
+    });
 
 $(document).on('click','#json_file',function(e){
   var json_file=$('#json_file').val();
@@ -41,20 +97,25 @@ if(jQuery.trim(sk).length <= 0)
 
 
         success: function(result) {
+        JSON=result;
         if(result.hasOwnProperty('error')){
             $('#info').show();
             $('#info').text(result['error']);
-            $('#choice').html("<div id=\"choice\"><select name=\"json_file\" size=\"10\" id=\"json_file\"></select></div>");
+            $('#choice').html("<div id=\"choice\"></div>");
 
             }
             else {
-            var search_info="<div id=\"choice\"><select name=\"json_file\" id=\"json_file\" size=\"10\">"
+            var search_info="<div id=\"choice\">"
             $.each(result, function (key, value) {
-                search_info+="<option value=\""+key+"\">"+value+"</option>"
+
+                $.each(value.articles_details, function (skey, svalue) {
+                    search_info+="<br/><b><a class=\"lks\" href=\"#\" value=\""+key+"\">"+skey+"</a></b><br/>"+svalue+"<br/>";
+
+                });
             });
             $('#info').hide();
 
-            search_info+="</select></div>"
+            search_info+="</div>"
             $('#choice').html(search_info);
 
 
@@ -80,25 +141,40 @@ $('#searchbutton').click();
 {% block content %}
 <div id="word" class="hidden">{{ sk }}</div>
 
-    <br/>
-    <table width='100%' cellspacing="6">
+<div id="content">
+
+
+<br/>
+    <table id="searchtable" width='100%'>
     <tr>
 
-        <td width="70%"><input type="text" class="searchbox" id="searchtext" name="searchtext" value='{{ sk }}' /></td>
+        <td width="80%"><input type="text" class="searchbox" id="searchtext" name="searchtext" value='{{ sk }}' /></td>
+        <td width="2%"></td>
 
-        <td width="15%"><input class="btn" type="button" id="searchbutton" name="searchbutton" value="Search" /></td>
+        <td width="18%"><input class="btn" type="button" id="searchbutton" name="searchbutton" value="Search" /></td>
 
-        <td width="15%"><input class="btn" type="button" id="plus" value="+" /></td>
+
     </tr>
+
     <tr>
-        <td colspan="3">
-        <div id="info" style="color:white;">
+        <td width="100%" colspan="3">
+        <div id="info">
 
 
         </div>
         </td>
     </tr>
         <tr>
+            <td colspan="3">
+
+                <br/><b>Ryan Suspect</b><br/>The border-color property sets the color of an element's four borders. This  property can have from ... top border is red; right border is green; bottom border is  blue; left border is pink ... HTML DOM reference: borderColor property · «  Previous.
+<div id="choice"></div>
+            </td>
+
+        </tr>
+
+
+        <!--tr>
         <td id="page1">
 
            <div id="choice">
@@ -113,7 +189,7 @@ $('#searchbutton').click();
 
         </td>
 
-    </tr>
+    </tr-->
 
 
 
@@ -121,9 +197,30 @@ $('#searchbutton').click();
 
 </table>
 
+</div>
 
 
+{% endblock %}
+
+{% block sidecontent %}
+    <br/>
+<table width="100%" >
+<tr>
+        <td ><input class="dbtn tabs active" type="button" id="summary" value="Summary" /></td>
+        <td ><input class="dbtn tabs" type="button" id="inferences" value="Inferences" /></td>
+        <td ><input class="dbtn tabs " type="button" id="links" value="Links"  /></td>
 
 
+        <td ><input class="dbtn tabs" type="button" id="hierarchy" value="Hierarchy" /></td>
+        <td ><input class="dbtn tabs" type="button" id="rep" value="Reps" /></td>
+        <td ><input class="dbtn tabs" type="button" id="stats" value="Stats" /></td>
 
+        </tr>
+    <tr>
+        <td width="100%" colspan="6">
+            <div id="extra_area" ></div>
+
+        </td>
+    </tr>
+</table>
 {% endblock %}

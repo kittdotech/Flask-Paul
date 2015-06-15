@@ -1,30 +1,57 @@
 html, body
 {
-    height:100%;
+    #height:100%;
     width:100%;
     margin:0;
     padding:0;
     font-family: "verdana";
+}
+
+
+#page
+{
+    #min-height:100%;
+#height:300px;
+}
+
+.text_header {
+    padding-left: 300px;
+    #height:100%;
+    height:150px;
+    padding-right:400px;
+    width:40%;
+
+}
+.text_content {
+    padding-left: 300px;
+
+    height:auto;
+    min-heigth:500px;
+    #padding-right:400px;
+    float:left;
+width:40%;
+
 
 }
 
-.text_header,.text_footer,.text_content {
-    padding-left: 350px;
-    height:100%;
-    padding-right:350px;
-
+.side_content
+{
+    float:left;
+    padding-left: 60px;
 }
 
 .header
 {
     background-color: #344c66;
-    height: 20%;
+    #height: 20%;
+    font-size:14px;
 }
 
 .title_header
 {
-    height:80%;
+    height:85%;
     color: white;
+
 
 
 }
@@ -33,19 +60,17 @@ html, body
 {
     height:20%;
 
+
 }
 
 
-.footer
-{
-    background-color: #202f3f;
-    height: 10%
-}
 
-.content
+.main_content
 {
     background-color: #202f3f;
-    height: 70%
+    height: auto;
+
+
 }
 
 .bloc { display:inline-block; vertical-align:top; overflow:hidden; border:solid grey 1px;width:91%; }
@@ -58,10 +83,20 @@ html, body
      color: white;
 
  }
-
+.dbtn
+ {
+     background: none;
+     border:none;
+     color:#5c87b5;
+    cursor:pointer;
+ }
+input:focus{
+    outline: 0;
+}
 .active
 {
-    background: #547ca6;
+    font-weight:bold;
+
 }
 
 .hidden {
@@ -80,18 +115,23 @@ html, body
 }
 
 #searchtext {
-    vertical-align: top;
-    display:inline-block;
+    #vertical-align: top;
+    #display:inline-block;
 
 
-    border:0;
-
+    #border:10px;
+    #border-color:#344c66;
     height:26px;
-    margin:0;
-    border:0;
+    #margin:0;
+    border:1px;
+border:1px solid #344c66;
     width:100%;
 
-    font-size:16px;
+    #box-sizing:border-box;
+#-moz-box-sizing:border-box;
+#-webkit-box-sizing:border-box;
+
+    font-size:14px;
 }
 #searchbutton {
     display:inline-block;
@@ -130,4 +170,15 @@ html, body
 #json_file
 {
     width:100%;
+}
+
+#content
+{
+    font-size:12px;
+    background:white;
+    height:100%
+
+}
+a {text-decoration: none;
+color:black;
 }

@@ -154,22 +154,47 @@ def search(key=None):
         for f in files:
            if f.lower().endswith((".json")):
               try:
+                count=1
                 with open(root+'/'+f) as data_file:
                         for data in json_parse(data_file):
                             title=data['article_title']
+                            articles={}
+                            collection={}
+                            found=False
                             for a in data['article_sections']:
-                                str_section=a['section_text']
-                                str_find=request.args['sk']
 
-                                res=string.find(str_section.lower() ,str_find.lower())
-                                if res!=-1:
-                                    json_list.update({root+'/'+f:title})
+                                    str_section=a['section_text']
+                                    str_section_name=a['section_name']
+                                    str_find=request.args['sk']
+
+                                    res=string.find(str_section.lower() ,str_find.lower())
+                                    print res
+                                    if res!=-1:
+                                        found=True
+                                        articles.update({str_section_name:str_section})
+                                        if not collection:
+                                            Summary=data.get('Summary', " ")
+                                            Links=walk(data.get('Links', ""))
+                                            Hierarchy=walk(data.get('Hierarchy   ', ""))
+                                            Inferences=walk(data.get('Inferences', ""))
+                                            Reps=walk(data.get('Reps', ""))
+                                            Stats=walk(data.get('Stats', ""))
+                                            collection.update({'Summary':Summary})
+                                            collection.update({'Links':Links})
+                                            collection.update({'Hierarchy':Hierarchy})
+                                            collection.update({'Inferences':Inferences})
+                                            collection.update({'Reps':Reps})
+                                            collection.update({'Stats':Stats})
+                            if found:
+                                json_list.update({root+'/'+f:{'articles_details':articles,'collection_details':collection}})
+
 
 
               except Exception as e:
                 print e.message
     if not json_list:
         json_list.update({'error':'NO result found...'})
+    print json_list
     return jsonify(json_list)
     #return 'hello'
 
