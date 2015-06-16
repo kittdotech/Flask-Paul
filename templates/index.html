@@ -94,7 +94,7 @@ if(jQuery.trim(sk).length <= 0)
 
             }
             else {
-            var search_info="<div id=\"choice\">"
+            var search_info="<div id=\"choice\">";
             $.each(result, function (key, value) {
 
                     $.each(value.articles_details, function (skey, svalue) {
@@ -104,7 +104,8 @@ if(jQuery.trim(sk).length <= 0)
             });
             $('#info').hide();
 
-            search_info+="</div>"
+            search_info+="</div>";
+            if ($("#divcontent").height()<100)
             $("#divcontent").addClass("height_auto").removeClass("height_fixed");
 
             $('#choice').html(search_info);
@@ -156,24 +157,6 @@ $('#searchbutton').click();
             </td>
 
         </tr>
-
-
-        <!--tr>
-        <td id="page1">
-
-           <div id="choice">
-
-
-  <select name="json_file" id="json_file" size="10">
-
-   </select>
-
-</div>
-
-
-        </td>
-
-    </tr-->
 
 
 
