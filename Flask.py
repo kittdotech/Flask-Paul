@@ -100,13 +100,14 @@ def objwalk(obj, path=(), memo=None):
 
 @app.route('/apis')
 def apis(name=None):
-    return " "
+    return render_template('apis.html',name=name)
+
 
 
 
 @app.route('/settings')
 def settings(name=None):
-    return " "
+    return render_template('settings.html',name=name)
 
 @app.route('/index')
 def index(name=None):
@@ -129,6 +130,7 @@ def search(key=None):
                             articles={}
                             collection={}
                             found=False
+                            title=data['article_title'];
                             for a in data['article_sections']:
 
                                     str_section=a['section_text']
@@ -154,7 +156,7 @@ def search(key=None):
                                             collection.update({'Reps':Reps})
                                             collection.update({'Stats':Stats})
                             if found:
-                                json_list.update({root+'/'+f:{'articles_details':articles,'collection_details':collection}})
+                                json_list.update({title:{'articles_details':articles,'collection_details':collection}})
 
 
 

@@ -58,7 +58,7 @@ width:40%;
 {
     background-color: #344c66;
     #height: 20%;
-    font-size:14px;
+    font-size:16px;
 }
 
 .title_header
@@ -73,6 +73,7 @@ width:40%;
 .menu_header
 {
     height:20%;
+    font-size: 14px;
 
 
 }
@@ -146,7 +147,7 @@ border:1px solid #344c66;
 #-moz-box-sizing:border-box;
 #-webkit-box-sizing:border-box;
 
-    font-size:14px;
+    font-size:16px;
 }
 #searchbutton {
     display:inline-block;
@@ -189,7 +190,7 @@ border:1px solid #344c66;
 
 #content
 {
-    font-size:12px;
+    font-size:14px;
     background:white;
     height:100%
 
@@ -200,6 +201,11 @@ color:black;
 #extra_area
 {
     color: white;
-        font-size:12px;
+        font-size:14px;
+    font-style: normal;
 
+}
+.lks
+{
+     text-transform: uppercase;
 }
