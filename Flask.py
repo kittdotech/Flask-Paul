@@ -100,51 +100,19 @@ def objwalk(obj, path=(), memo=None):
 
 @app.route('/apis')
 def apis(name=None):
-    return render_template('apis.html',name=name)
+    return " "
 
 
 
 @app.route('/settings')
 def settings(name=None):
-    return render_template('settings.html',name=name)
+    return " "
 
 @app.route('/index')
 def index(name=None):
     sk=request.args.get('sk',"")
     return render_template('index.html',name=name,page=1,sk=sk)
     #return 'hello'
-@app.route('/details')
-def page2(name=None):
-    path=request.args['json_file']
-    sk=request.args['sk']
-    session['json_file']=path
-    count=0
-    section_text={}
-    with open(path) as data_file:
-
-        for data in json_parse(data_file):
-            print data
-            selected_info=walk(data.get('article_title',""))
-
-            Summary=data.get('Summary', " ")
-            print data.get('Links', "")
-            Links=walk(data.get('Links', ""))
-            Hierarchy=walk(data.get('Hierarchy   ', ""))
-            Inferences=walk(data.get('Inferences', ""))
-            Reps=walk(data.get('Reps', ""))
-
-            Stats=walk(data.get('Stats', ""))
-
-
-            for a in data['article_sections']:
-
-                section_text.update({str(count):a['section_text']})
-
-                count+=1
-
-
-
-    return render_template('details.html',sk=sk,selected_info=selected_info,page=2,section_text=data['article_sections'],Stats=Stats,Reps=Reps,Summary=Summary,Links=Links,Inferences=Inferences,Hierarchy=Hierarchy )
 
 @app.route('/search',methods = ['POST','GET'])
 def search(key=None):
@@ -218,4 +186,4 @@ def json_parse(fileobj, decoder=JSONDecoder(), buffersize=2048):
 
 if __name__ == '__main__':
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-    app.run('0.0.0.0')
+    app.run(host='0.0.0.0',port=5001)
