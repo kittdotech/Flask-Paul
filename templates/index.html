@@ -57,11 +57,14 @@ $(document).on('click', '.lks',function(e)  {
 $.each(JSON[section_selected].articles_details, function (key, value) {
 
 
+if(key=="first paragraph")
+{
+    search_info = "<br/>" + value + "<br/>"+search_info;
+}
+else {
 
-
-
-                        search_info+="<br/><a class=\"secs\" href=\"#\" value=\""+key+"\">"+key+"</a><br/><br/>"+value+"<br/>";
-
+    search_info += "<br/><a class=\"secs\" href=\"#\" value=\"" + key + "\">" + key + "</a><br/><br/>" + value + "<br/>";
+}
 
 
 
