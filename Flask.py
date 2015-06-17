@@ -136,12 +136,13 @@ def search(key=None):
                                     str_section=a['section_text']
                                     str_section_name=a['section_name']
                                     str_find=request.args['sk']
-
+                                    articles.update({str_section_name:str_section})
                                     res=string.find(str_section.lower() ,str_find.lower())
                                     print res
                                     if res!=-1:
                                         found=True
-                                        articles.update({str_section_name:str_section})
+
+
                                         if not collection:
                                             Summary=data.get('Summary', " ")
                                             Links=walk(data.get('Links', ""))
@@ -155,6 +156,7 @@ def search(key=None):
                                             collection.update({'Inferences':Inferences})
                                             collection.update({'Reps':Reps})
                                             collection.update({'Stats':Stats})
+
                             if found:
                                 json_list.update({title:{'articles_details':articles,'collection_details':collection}})
 
