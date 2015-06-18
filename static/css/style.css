@@ -5,7 +5,7 @@ html, body
     margin:0;
     padding:0;
     font-family: "verdana";
-    background-color: #202f3f;
+    background-color: #cccccc;
 
 
 }
@@ -23,6 +23,8 @@ html, body
     height:150px;
     padding-right:400px;
     width:50%;
+    color:white;
+
 
 }
 .text_content {
@@ -40,7 +42,7 @@ width:50%;
 
 .height_fixed{
 
-    height:500px;
+    height:600px;
 }
 
 .height_auto{
@@ -57,15 +59,16 @@ width:50%;
 
 .header
 {
-    background-color: #344c66;
+    background-color: #2e435e;
     #height: 20%;
     font-size:16px;
 }
 
 .title_header
 {
-    height:85%;
+    height:75%;
     color: white;
+    padding-top:10px;
 
 
 
@@ -78,12 +81,16 @@ width:50%;
 
 
 }
-
+.mainlinks
+{
+    text-decoration: none;
+    color:#cccccc;
+}
 
 
 .main_content
 {
- background-color: #202f3f;
+ background-color: #cccccc;
     height: auto;
 
     
@@ -97,16 +104,17 @@ width:50%;
 
  .btn
  {
-     background: #344c66;
+     background: #345ef2;
      border:0;
      color: white;
+     font-size:14px;
 
  }
 .dbtn
  {
      background: none;
      border:none;
-     color:#5c87b5;
+     color:#345ef2;
     cursor:pointer;
     font-size:14px;
 
@@ -152,7 +160,7 @@ border:1px solid #344c66;
 #-moz-box-sizing:border-box;
 #-webkit-box-sizing:border-box;
 
-    font-size:16px;
+    font-size:14px;
 }
 #searchbutton {
     display:inline-block;
@@ -206,9 +214,11 @@ color:black;
 }
 #extra_area
 {
-    color: #696969;
+    color: black;
         font-size:14px;
     font-style: normal;
+    padding-left: 12px;
+    padding-right: 10px;
 
 }
 .lks
@@ -223,4 +233,8 @@ color:black;
 {
     padding-left:80px;
     padding-right:80px;
+}
+#choice
+{
+    white-space: pre-line;
 }

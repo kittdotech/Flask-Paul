@@ -55,17 +55,16 @@ $(document).on('click', '.lks',function(e)  {
                         search_info="<div id=\"choice\">";
 
 $.each(JSON[section_selected].articles_details, function (key, value) {
+$.each(value, function (skey, svalue) {
 
+    if (key == 0) {
+        search_info += "<br/>" + svalue + "<br/>";
+    }
+    else {
 
-if(key=="first paragraph")
-{
-    search_info = "<br/>" + value + "<br/>"+search_info;
-}
-else {
-
-    search_info += "<br/><a class=\"secs\" href=\"#\" value=\"" + key + "\">" + key + "</a><br/><br/>" + value + "<br/>";
-}
-
+        search_info += "<br/><a class=\"secs\" href=\"#\" value=\"" + skey + "\">" + skey + "</a><br/><br/>" + svalue + "<br/>";
+    }
+});
 
 
                 });
@@ -120,7 +119,7 @@ if(jQuery.trim(sk).length <= 0)
             else {
             var search_info="<div id=\"choice\">";
             $.each(result, function (key, value) {
-                    search_info+="</br><a class=\"lks\" href=\"#\" value=\""+key+"\">"+key+"</a></br>";
+                    search_info+="</br><b><a class=\"lks\" href=\"#\" value=\""+key+"\">"+key+"</a></b></br>";
 
 
                 });
@@ -200,19 +199,17 @@ $('#searchbutton').click();
     <br/>
 <table id="extra_info_table" width="460px"  style="table-layout:fixed;">
 <tr>
-        <td width="40px"><input class="dbtn tabs active" type="button" id="summary" value="Summary" /></td>
+        <td  width="40px" style="text-align:left"><input class="dbtn tabs active" type="button" id="summary" value="Summary" /></td>
         <td width="45px"><input class="dbtn tabs" type="button" id="inferences" value="Inferences" /></td>
-        <td width="30px"><input class="dbtn tabs " type="button" id="links" value="Links"  /></td>
-
-
+        <td width="25px"><input class="dbtn tabs " type="button" id="links" value="Links"  /></td>
         <td width="40px"><input class="dbtn tabs" type="button" id="hierarchy" value="Hierarchy" /></td>
         <td width="20px"><input class="dbtn tabs" type="button" id="rep" value="Reps" /></td>
         <td width="35px"><input class="dbtn tabs" type="button" id="stats" value="Stats" /></td>
 
         </tr>
     <tr>
-        <td width="100%" colspan="6">
-          <div width="100%" id="extra_area"></div>
+        <td colspan="6">
+            <div width="100%" id="extra_area"></div>
         </td>
     </tr>
 </table>

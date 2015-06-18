@@ -6,6 +6,7 @@ from flask import jsonify
 from flask import request
 from functools import partial
 import string
+import re
 import types
 
 app = Flask(__name__)
@@ -127,18 +128,20 @@ def search(key=None):
                 with open(root+'/'+f) as data_file:
                         for data in json_parse(data_file):
                             title=data['article_title']
-                            articles={}
+                            articles=[]
                             collection={}
                             found=False
                             title=data['article_title'];
                             for a in data['article_sections']:
 
-                                    str_section=a['section_text']
+                                    str_section=re.sub(r'\n[\n]*', r'<br/><br/>', a['section_text'])
+                                    section_number=a['section_number']
                                     str_section_name=a['section_name']
                                     str_find=request.args['sk']
-                                    articles.update({str_section_name:str_section})
+                                    print section_number
+                                    articles.insert(section_number,{str_section_name:str_section})
                                     res=string.find(str_section.lower() ,str_find.lower())
-                                    print res
+
                                     if res!=-1:
                                         found=True
 
