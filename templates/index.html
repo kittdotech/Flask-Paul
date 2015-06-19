@@ -53,6 +53,7 @@ $(document).on('click', '.lks',function(e)  {
 
         section_selected=$(this).attr("value");
                         search_info="<div id=\"choice\">";
+                        search_info+="<br/><b>"+section_selected+"</b><br/>";
 
 $.each(JSON[section_selected].articles_details, function (key, value) {
 $.each(value, function (skey, svalue) {
@@ -119,7 +120,7 @@ if(jQuery.trim(sk).length <= 0)
             else {
             var search_info="<div id=\"choice\">";
             $.each(result, function (key, value) {
-                    search_info+="</br><b><a class=\"lks\" href=\"#\" value=\""+key+"\">"+key+"</a></b></br>";
+                    search_info+="</br><a class=\"lks\" href=\"#\" value=\""+key+"\">"+key+"</a></br>";
 
 
                 });
