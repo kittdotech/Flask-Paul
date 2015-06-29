@@ -4,6 +4,7 @@
     var tab_selected="Summary";
 var section_selected="";
     var JSON=null;
+    var screen_height=600;
 jQuery(document).ready(function() {
 $("#divcontent").addClass("height_fixed").removeClass("height_auto");
 
@@ -42,10 +43,38 @@ function showtab() {
 
         showtab();
 
-
-
+levelheight();
         e.preventDefault();
     });
+
+
+    function levelheight()
+    {
+var right=$('#side_content').height();
+var left=$('#choice').height();
+
+if(right>=left && right>screen_height)
+{
+
+
+$('#choice').height(right);
+}
+        else
+{
+   $('#choice').height('auto');
+}
+
+        if ($("#choice").height()>screen_height) {
+            document.getElementById('divcontent').style.height = 'auto';
+                 }
+        else
+        {
+
+          $('#divcontent').height(screen_height);
+        }
+
+    }
+
 
 $(document).on('click', '.lks',function(e)  {
 
@@ -72,13 +101,10 @@ $.each(value, function (skey, svalue) {
 
             search_info+="</div>";
     $('#choice').html(search_info);
-            if ($("#choice").height()>$("#divcontent").height())
-                $("#divcontent").addClass("height_auto").removeClass("height_fixed");
-            else
-                $("#divcontent").addClass("height_fixed").removeClass("height_auto");
+
 
         showtab();
-
+ levelheight();
 
         e.preventDefault();
     });
@@ -109,7 +135,7 @@ if(jQuery.trim(sk).length <= 0)
         if(result.hasOwnProperty('error')){
             $('#info').show();
             $('#info').text(result['error']);
-            $("#divcontent").addClass("height_fixed").removeClass("height_auto");
+        //    $("#divcontent").addClass("height_fixed").removeClass("height_auto");
 
 
         document.getElementById('extra_area').innerHTML="";
@@ -128,10 +154,6 @@ if(jQuery.trim(sk).length <= 0)
 
             search_info+="</div>";
             $('#choice').html(search_info);
-            if ($("#choice").height()>$("#divcontent").height())
-                $("#divcontent").addClass("height_auto").removeClass("height_fixed");
-            else
-                $("#divcontent").addClass("height_fixed").removeClass("height_auto");
 
 
 
@@ -139,6 +161,7 @@ if(jQuery.trim(sk).length <= 0)
 
 
         }
+            levelheight();
     },
         error: function(err) {
         alert(err.toString());
@@ -198,7 +221,7 @@ $('#searchbutton').click();
 
 {% block sidecontent %}
     <br/>
-<table id="extra_info_table" width="460px"  style="table-layout:fixed;">
+<table id="extra_info_table" width="600px"  style="table-layout:fixed;">
 <tr>
         <td  width="40px" style="text-align:left"><input class="dbtn tabs active" type="button" id="summary" value="Summary" /></td>
         <td width="45px"><input class="dbtn tabs" type="button" id="inferences" value="Inferences" /></td>
