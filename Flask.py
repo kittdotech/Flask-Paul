@@ -156,12 +156,11 @@ def search(key=None):
 
                                             Hierarchy=""
                                             for k in data['wm']['textReps']['reps']:
+                                                level=k['level']
                                                 if not k['children']:
-                                                    Hierarchy+=('<p class="hierarchy-all" style="padding-left:' + str(k['level']*3)+'em;">'+k['sentence']+'</p><br/><br/>')
+                                                    Hierarchy+=('<p class="hierarchy-all" style="padding-left:' + str(level*50)+'px;">'+k['sentence']+'</p><br/><br/>')
                                                 else:
-                                                    Hierarchy+=('<p class="hierarchy-all hierarchy-child" style="padding-left:'+ str(k['level']*3)+'em;">'+k['sentence']+'</p><br/><br/>')
-
-
+                                                    Hierarchy+=('<p class="hierarchy-all hierarchy-child" style="padding-left:'+ str(level*50)+'px;">'+k['sentence']+'</p><br/><br/>')
                                             Inferences=walk(data.get('Inferences', ""))
                                             Reps=walk(data.get('Reps', ""))
                                             Stats=walk(data.get('Stats', ""))

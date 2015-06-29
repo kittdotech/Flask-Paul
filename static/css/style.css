@@ -32,7 +32,7 @@ html, body
 
     #padding-right:50px;
     float:left;
-width:55%;
+width:40%;
 
 
 }
@@ -76,7 +76,7 @@ width:55%;
 {
     height:20%;
     font-size: 14px;
-    padding-right: 10px;
+    padding-right: 215px;
 
 }
 .mainlinks
@@ -239,12 +239,15 @@ color:black;
 }
 .hierarchy-child
 {
-    color: #919191;
+    color: #a7a7a7;
 
 }
 
 .hierarchy-all
 {
-   margin: 0em;
-    display:block;
+   margin-left: 0em;
+   margin-top: -0.8em;
+    margin-bottom:-0.8em;
+
+
 }
