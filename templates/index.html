@@ -110,21 +110,26 @@ $.ajax({
 
         articles[currobj['section_number']][currobj['section_name']]=currobj['section_text'].replace(/\r?\n[\r?\n]*/g, "<br/><br/>");
        }
-        var Reps="<table width='100%' style='table-layout:fixed;'>";
-       var Hierarchy="";
+        var Reps="<table width='100%' cellspacing='10' style='table-layout:fixed;'>";
+       var Hierarchy="<br/>";
         for (k=0 ;k< result['wm']['textReps']['reps'].length;k++) {
             var currobj=result['wm']['textReps']['reps'][k];
             var level = currobj['level'];
-            var Hcontent="";
+
             if(currobj['children'].length==0) {
-             Hcontent = ('<p class="hierarchy-all" style="padding-left:' + String(level * 50) + 'px;">' + currobj['sentence'] + '</p><br/><br/>');
+             Hierarchy+=('<p class="hierarchy-all" style="padding-left:' + String(level * 50) + 'px;">' + currobj['sentence'] + '</p><br/><br/>');
+                Reps+=('<tr><td width="50%" valign="top"><p class="reps-all" style="padding-left:' + String(level * 50) + 'px;">' + currobj['sentence'] + '</p></td><td width="50%" valign="top">'+currobj['rep']+'</td></tr>');
+
             }
             else
             {
-            Hcontent = ('<p class="hierarchy-all hierarchy-child" style="padding-left:' + String(level * 50) + 'px;">' + currobj['sentence'] + '</p><br/><br/>');
-        }
-        Hierarchy+=Hcontent;
-            Reps+=("<tr><td>"+Hcontent+"</td><td>"+currobj['rep']+"</td></tr>");
+            Hierarchy+=('<p class="hierarchy-all hierarchy-child" style="padding-left:' + String(level * 50) + 'px;">' + currobj['sentence'] + '</p><br/><br/>');
+                Reps+=('<tr><td width="50%" valign="top"><p class="reps-all rep-child" style="padding-left:' + String(level * 50) + 'px;">' + currobj['sentence'] + '</p></td><td width="50%" valign="top">'+currobj['rep']+'</td></tr>');
+
+            }
+
+
+
 
         }
             Reps+="</table>";
@@ -140,7 +145,7 @@ $.ajax({
         var collection={};
             collection['Hierarchy']=Hierarchy;
             collection['Links']=Links;
-
+             collection['Reps']=Reps;
             JSON[section_selected]["articles_details"]=articles;
 
             JSON[section_selected]["collection_details"]=collection;

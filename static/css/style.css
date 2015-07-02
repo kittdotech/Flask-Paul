@@ -217,7 +217,7 @@ color:black;
         font-size:14px;
     font-style: normal;
     margin-left: 25px;
-
+    word-wrap: break-word;
 
 }
 .lks
@@ -242,12 +242,22 @@ color:black;
     color: #a7a7a7;
 
 }
+.rep-child
+{
+    color: #a7a7a7;
 
+}
 .hierarchy-all
 {
    margin-left: 0em;
    margin-top: -0.8em;
     margin-bottom:-0.8em;
+}
+.reps-all
+{
+   margin-left: 0em;
+   margin-top: 0em;
+    margin-bottom:0em;
 }
 #Reps_table
 {
